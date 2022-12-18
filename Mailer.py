@@ -1,3 +1,4 @@
+from random import randint
 from email.mime.text import MIMEText
 from smtplib import SMTP_SSL
 from email.mime.multipart import MIMEMultipart
@@ -17,7 +18,6 @@ class Mailer:
         body['From'] = self.email
         body['To'] = dest
         body['Subject'] = f"[Ticket #{self.generate_token(msg)}] Mailer"
-
         body.attach(MIMEText(msg, 'plain'))
 
         with SMTP_SSL("smtp.mail.ru", 465) as smtp:
@@ -27,5 +27,5 @@ class Mailer:
             smtp.quit()
 
     def generate_token(self, msg):
-        self.ID = hash(msg) % 99999
+        self.ID = hash(msg) * randint(1, 1000)
         return self.ID

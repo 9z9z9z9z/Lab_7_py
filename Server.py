@@ -6,7 +6,6 @@ from dotenv import load_dotenv
 class Server:
     def __init__(self):
         self.server = None
-
         self.client_socket = None
         self.address = None
 
@@ -28,9 +27,3 @@ class Server:
 
     def stop(self):
         self.server.close()
-
-    def log(self, file, msg):
-        with open(file, "a") as f:
-            now = datetime.now().strftime("%d.%m.%Y|%H:%M:%S")
-            f.write(f"[{now}] {msg}\n")
-            f.close()

@@ -6,6 +6,7 @@ PORT = 50007
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.connect((HOST, PORT))
 
-email = input("Email:\t")
-text = input("Text:\t")
-server.send((email + ":" + text).encode("utf-8"))
+while True:
+    email = input("Email:\t")
+    text = input("Text:\t")
+    server.send((email + ":" + text).encode("utf-8"))

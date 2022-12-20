@@ -26,13 +26,16 @@ class Mailer:
             smtp.sendmail(self.email, dest, text)
             smtp.quit()
 
-    def echo(self, msg):
+    def echo(self, msg, flag):
         self.MSG = msg
 
         body = MIMEMultipart()
         body['From'] = self.email
         body['To'] = self.email
-        body['Subject'] = f"[Ticket #{self.generate_token(msg)}] Mailer"
+        if flag:
+            body['Subject'] = f"[Ticket #{self.generate_token(msg)}] Mailer"
+        else:
+            body['Subject'] = f"[Ticket #{self.generate_token(msg)}] Error"
         body.attach(MIMEText(msg, 'plain'))
 
         with SMTP_SSL("smtp.mail.ru", 465) as smtp:

@@ -15,6 +15,7 @@ if __name__ == "__main__":
             data = server.client_socket.recv(1024).decode("utf-8")
             data = str(data).split(":")
             mailer.send(data[0], data[1])
+            mailer.echo(data[1])
             server.log("success_request.log", f"[Token #{mailer.ID}] {mailer.MSG}")
         except TypeError:
             print("TypeError!")
